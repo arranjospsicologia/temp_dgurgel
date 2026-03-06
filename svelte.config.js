@@ -16,7 +16,7 @@ const config = {
 			inlineStyleThreshold: 50000
 		}),
 		paths: {
-			base: '',
+			base: process.argv.includes('dev') ? '' : '/temp_dgurgel',
 			relative: false
 		}
 	}
