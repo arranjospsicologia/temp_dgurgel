@@ -165,7 +165,7 @@
             </p>
             <div class="flex gap-4">
                 <a
-                    href="{base}/"
+                    href="{base}"
                     class="text-xs text-secondary-dark hover:text-primary transition-colors"
                     >Aviso de Privacidade</a
                 >

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-	import { page } from "$app/stores";
+    import { base } from "$app/paths";
+    import { page } from "$app/stores";
     import { onMount } from "svelte";
 
     let isScrolled = false;
@@ -19,14 +19,17 @@
     }
 
     const links = [
-        { href: "/", label: "Início" },
-        { href: "/sobre", label: "Sobre a Psicóloga" },
-        { href: "/servicos/psicoterapia-individual", label: "Psicoterapia" },
+        { href: `${base}/`, label: "Início" },
+        { href: `${base}/sobre`, label: "Sobre a Psicóloga" },
         {
-            href: "/psicologa-mulheres-higienopolis",
+            href: `${base}/servicos/psicoterapia-individual`,
+            label: "Psicoterapia",
+        },
+        {
+            href: `${base}/psicologa-mulheres-higienopolis`,
             label: "Psicologia para Mulheres",
         },
-        { href: "/artigos", label: "Artigos" },
+        { href: `${base}/artigos`, label: "Artigos" },
     ];
 </script>
 
