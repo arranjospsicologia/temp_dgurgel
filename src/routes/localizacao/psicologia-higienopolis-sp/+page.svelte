@@ -1,5 +1,6 @@
 <script lang="ts">
-    import SEO from "$lib/components/SEO.svelte";
+	import { base } from '$app/paths';
+	import SEO from "$lib/components/SEO.svelte";
 
     const placeSchema = {
         "@context": "https://schema.org",
@@ -39,7 +40,7 @@
                 itemscope
                 itemtype="https://schema.org/ListItem"
             >
-                <a itemprop="item" href="/"
+                <a itemprop="item" href="{base}/"
                     ><span itemprop="name">Início</span></a
                 >
                 <meta itemprop="position" content="1" />
@@ -76,16 +77,16 @@
                     <picture>
                         <source
                             type="image/avif"
-                            srcset="/images/consultorio-psicologia-higienopolis-sp-02-400w.avif 400w, /images/consultorio-psicologia-higienopolis-sp-02-800w.avif 800w"
+                            srcset="{base}/images/consultorio-psicologia-higienopolis-sp-02-400w.avif 400w, {base}/images/consultorio-psicologia-higienopolis-sp-02-800w.avif 800w"
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                         <source
                             type="image/webp"
-                            srcset="/images/consultorio-psicologia-higienopolis-sp-02-400w.webp 400w, /images/consultorio-psicologia-higienopolis-sp-02-800w.webp 800w"
+                            srcset="{base}/images/consultorio-psicologia-higienopolis-sp-02-400w.webp 400w, {base}/images/consultorio-psicologia-higienopolis-sp-02-800w.webp 800w"
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                         <img
-                            src="/images/consultorio-psicologia-higienopolis-sp-02-800w.webp"
+                            src="{base}/images/consultorio-psicologia-higienopolis-sp-02-800w.webp"
                             alt="Recepção do consultório de psicologia em Higienópolis, SP"
                             loading="lazy"
                             decoding="async"

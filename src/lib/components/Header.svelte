@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { page } from "$app/stores";
+	import { base } from '$app/paths';
+	import { page } from "$app/stores";
     import { onMount } from "svelte";
 
     let isScrolled = false;
@@ -39,12 +40,12 @@
     >
         <!-- Logo -->
         <a
-            href="/"
+            href="{base}/"
             class="flex items-center gap-3 z-50"
             aria-label="Página Inicial do Consultório Danielle Gurgel"
         >
             <img
-                src="/images/logo.avif"
+                src="{base}/images/logo.avif"
                 alt="Logo Danielle Gurgel"
                 width="45"
                 height="45"

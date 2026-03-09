@@ -1,5 +1,6 @@
 <script lang="ts">
-    import SEO from "$lib/components/SEO.svelte";
+	import { base } from '$app/paths';
+	import SEO from "$lib/components/SEO.svelte";
 
     const faqSchema = {
         "@context": "https://schema.org",
@@ -105,7 +106,7 @@
                     trabalho.
                 </p>
                 <a
-                    href="/experiencia/burnout-feminino"
+                    href="{base}/experiencia/burnout-feminino"
                     class="text-primary font-medium hover:text-primary-dark transition-colors inline-block mt-auto"
                     >&rarr; Entender sobre Burnout</a
                 >
@@ -123,7 +124,7 @@
                     romantizada.
                 </p>
                 <a
-                    href="/experiencia/relacionamentos-familiares"
+                    href="{base}/experiencia/relacionamentos-familiares"
                     class="text-primary font-medium hover:text-primary-dark transition-colors inline-block mt-auto"
                     >&rarr; Sobre Dinâmicas Familiares</a
                 >
@@ -141,7 +142,7 @@
                     ninho vazio.
                 </p>
                 <a
-                    href="/artigos"
+                    href="{base}/artigos"
                     class="text-primary font-medium hover:text-primary-dark transition-colors inline-block mt-auto"
                     >&rarr; Ver Artigos sobre o Tema</a
                 >
@@ -157,7 +158,7 @@
             <div class="w-full md:w-1/2">
                 <picture>
                     <img
-                        src="/images/consultorio-psicologia-higienopolis-sp-01-800w.webp"
+                        src="{base}/images/consultorio-psicologia-higienopolis-sp-01-800w.webp"
                         alt="Consultório da Psicóloga Danielle Gurgel na Av Angélica em Higienópolis"
                         loading="lazy"
                         decoding="async"

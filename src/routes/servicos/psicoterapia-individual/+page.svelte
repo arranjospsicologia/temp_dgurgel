@@ -1,5 +1,6 @@
 <script lang="ts">
-    import SEO from "$lib/components/SEO.svelte";
+	import { base } from '$app/paths';
+	import SEO from "$lib/components/SEO.svelte";
 
     const serviceSchema = {
         "@context": "https://schema.org",
@@ -27,7 +28,7 @@
                 itemscope
                 itemtype="https://schema.org/ListItem"
             >
-                <a itemprop="item" href="/"
+                <a itemprop="item" href="{base}/"
                     ><span itemprop="name">Início</span></a
                 >
                 <meta itemprop="position" content="1" />

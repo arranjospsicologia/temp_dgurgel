@@ -1,5 +1,6 @@
 <script lang="ts">
-    const currentYear = new Date().getFullYear();
+	import { base } from '$app/paths';
+	const currentYear = new Date().getFullYear();
 </script>
 
 <footer
@@ -13,7 +14,7 @@
             <div class="col-span-1 md:col-span-2 lg:col-span-1">
                 <div class="flex items-center gap-3 mb-6">
                     <img
-                        src="/images/logo.avif"
+                        src="{base}/images/logo.avif"
                         alt="Logo Danielle Gurgel"
                         width="40"
                         height="40"
@@ -49,35 +50,35 @@
                 <ul class="space-y-3 p-0 list-none">
                     <li>
                         <a
-                            href="/sobre"
+                            href="{base}/sobre"
                             class="text-sm text-gray-600 hover:text-primary transition-colors"
                             >Sobre a Psicóloga</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/servicos/psicoterapia-individual"
+                            href="{base}/servicos/psicoterapia-individual"
                             class="text-sm text-gray-600 hover:text-primary transition-colors"
                             >Psicoterapia Individual</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/psicologa-mulheres-higienopolis"
+                            href="{base}/psicologa-mulheres-higienopolis"
                             class="text-sm text-gray-600 hover:text-primary transition-colors"
                             >Psicóloga para Mulheres</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/experiencia/ansiedade-e-stress"
+                            href="{base}/experiencia/ansiedade-e-stress"
                             class="text-sm text-gray-600 hover:text-primary transition-colors"
                             >Ansiedade e Burnout</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/artigos"
+                            href="{base}/artigos"
                             class="text-sm text-gray-600 hover:text-primary transition-colors"
                             >Artigos</a
                         >
@@ -118,7 +119,7 @@
                             <p>Av. Angélica, 1996 - Higienópolis</p>
                             <p>São Paulo - SP, 01228-200</p>
                             <a
-                                href="/localizacao/psicologia-higienopolis-sp"
+                                href="{base}/localizacao/psicologia-higienopolis-sp"
                                 class="text-primary hover:text-primary-dark underline block mt-1"
                                 >Ver mapa completo</a
                             >
@@ -164,7 +165,7 @@
             </p>
             <div class="flex gap-4">
                 <a
-                    href="/"
+                    href="{base}/"
                     class="text-xs text-secondary-dark hover:text-primary transition-colors"
                     >Aviso de Privacidade</a
                 >

@@ -1,5 +1,6 @@
 <script lang="ts">
-    import SEO from "$lib/components/SEO.svelte";
+	import { base } from '$app/paths';
+	import SEO from "$lib/components/SEO.svelte";
 
     // Custom schema for Homepage
     const homeSchema = {
@@ -65,7 +66,7 @@
                         Agendar Primeira Sessão
                     </a>
                     <a
-                        href="/sobre"
+                        href="{base}/sobre"
                         class="btn btn-lg bg-white text-primary-dark border border-border-light hover:border-primary/50 shadow-sm"
                     >
                         Conhecer a Psicóloga
@@ -81,16 +82,16 @@
                     <picture>
                         <source
                             type="image/avif"
-                            srcset="/images/psicologa-danielle-gurgel-higienopolis-sp-450w.avif 450w, /images/psicologa-danielle-gurgel-higienopolis-sp-800w.avif 800w, /images/psicologa-danielle-gurgel-higienopolis-sp-1200w.avif 1200w"
+                            srcset="{base}/images/psicologa-danielle-gurgel-higienopolis-sp-450w.avif 450w, {base}/images/psicologa-danielle-gurgel-higienopolis-sp-800w.avif 800w, {base}/images/psicologa-danielle-gurgel-higienopolis-sp-1200w.avif 1200w"
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                         <source
                             type="image/webp"
-                            srcset="/images/psicologa-danielle-gurgel-higienopolis-sp-450w.webp 450w, /images/psicologa-danielle-gurgel-higienopolis-sp-800w.webp 800w, /images/psicologa-danielle-gurgel-higienopolis-sp-1200w.webp 1200w"
+                            srcset="{base}/images/psicologa-danielle-gurgel-higienopolis-sp-450w.webp 450w, {base}/images/psicologa-danielle-gurgel-higienopolis-sp-800w.webp 800w, {base}/images/psicologa-danielle-gurgel-higienopolis-sp-1200w.webp 1200w"
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                         <img
-                            src="/images/psicologa-danielle-gurgel-higienopolis-sp-800w.webp"
+                            src="{base}/images/psicologa-danielle-gurgel-higienopolis-sp-800w.webp"
                             alt="Psicóloga Danielle Gurgel no consultório em Higienópolis"
                             fetchpriority="high"
                             decoding="sync"
@@ -362,7 +363,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Especialidade 1 -->
-            <a href="/experiencia/ansiedade-e-stress" class="block group">
+            <a href="{base}/experiencia/ansiedade-e-stress" class="block group">
                 <div
                     class="bg-secondary-light rounded-2xl p-8 hover:shadow-lg transition-all duration-300 border border-transparent hover:border-primary/20 h-full"
                 >
@@ -380,7 +381,7 @@
 
             <!-- Especialidade 2 -->
             <a
-                href="/experiencia/relacionamentos-familiares"
+                href="{base}/experiencia/relacionamentos-familiares"
                 class="block group"
             >
                 <div
@@ -399,7 +400,7 @@
             </a>
 
             <!-- Especialidade 3 -->
-            <a href="/psicologa-mulheres-higienopolis" class="block group">
+            <a href="{base}/psicologa-mulheres-higienopolis" class="block group">
                 <div
                     class="bg-secondary-light rounded-2xl p-8 hover:shadow-lg transition-all duration-300 border border-transparent hover:border-primary/20 h-full"
                 >
@@ -426,16 +427,16 @@
                 <picture>
                     <source
                         type="image/avif"
-                        srcset="/images/psicologa-danielle-gurgel-sobre-400w.avif 400w, /images/psicologa-danielle-gurgel-sobre-800w.avif 800w"
+                        srcset="{base}/images/psicologa-danielle-gurgel-sobre-400w.avif 400w, {base}/images/psicologa-danielle-gurgel-sobre-800w.avif 800w"
                         sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     <source
                         type="image/webp"
-                        srcset="/images/psicologa-danielle-gurgel-sobre-400w.webp 400w, /images/psicologa-danielle-gurgel-sobre-800w.webp 800w"
+                        srcset="{base}/images/psicologa-danielle-gurgel-sobre-400w.webp 400w, {base}/images/psicologa-danielle-gurgel-sobre-800w.webp 800w"
                         sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     <img
-                        src="/images/psicologa-danielle-gurgel-sobre-800w.webp"
+                        src="{base}/images/psicologa-danielle-gurgel-sobre-800w.webp"
                         alt="Danielle Gurgel, psicóloga em Higienópolis lendo um livro"
                         loading="lazy"
                         decoding="async"
@@ -475,7 +476,7 @@
 
                 <div class="mt-8">
                     <a
-                        href="/sobre"
+                        href="{base}/sobre"
                         class="text-primary-dark font-semibold border-b-2 border-primary-light hover:border-primary transition-colors pb-1"
                     >
                         Minha abordagem completa &rarr;

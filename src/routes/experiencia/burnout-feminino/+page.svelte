@@ -1,5 +1,6 @@
 <script lang="ts">
-    import SEO from "$lib/components/SEO.svelte";
+	import { base } from '$app/paths';
+	import SEO from "$lib/components/SEO.svelte";
 
     const faqSchema = {
         "@context": "https://schema.org",
@@ -31,7 +32,7 @@
                 itemscope
                 itemtype="https://schema.org/ListItem"
             >
-                <a itemprop="item" href="/"
+                <a itemprop="item" href="{base}/"
                     ><span itemprop="name">Início</span></a
                 >
                 <meta itemprop="position" content="1" />
@@ -119,7 +120,7 @@
             <p class="mt-8 font-medium text-black">
                 <em
                     >Leia mais sobre minha linha de raciocínio no artigo: <a
-                        href="/artigos"
+                        href="{base}/artigos"
                         class="text-primary hover:text-primary-dark underline"
                         >"Como a cultura corporativa acelera quadros de Burnout
                         em mulheres"</a

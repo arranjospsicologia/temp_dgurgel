@@ -1,5 +1,6 @@
 <script lang="ts">
-    import SEO from "$lib/components/SEO.svelte";
+	import { base } from '$app/paths';
+	import SEO from "$lib/components/SEO.svelte";
 
     const aboutSchema = {
         "@context": "https://schema.org",
@@ -28,7 +29,7 @@
                 itemscope
                 itemtype="https://schema.org/ListItem"
             >
-                <a itemprop="item" href="/"
+                <a itemprop="item" href="{base}/"
                     ><span itemprop="name">Início</span></a
                 >
                 <meta itemprop="position" content="1" />
@@ -74,16 +75,16 @@
                     <picture>
                         <source
                             type="image/avif"
-                            srcset="/images/psicologa-danielle-gurgel-lendo-livro-400w.avif 400w, /images/psicologa-danielle-gurgel-lendo-livro-800w.avif 800w"
+                            srcset="{base}/images/psicologa-danielle-gurgel-lendo-livro-400w.avif 400w, {base}/images/psicologa-danielle-gurgel-lendo-livro-800w.avif 800w"
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                         <source
                             type="image/webp"
-                            srcset="/images/psicologa-danielle-gurgel-lendo-livro-400w.webp 400w, /images/psicologa-danielle-gurgel-lendo-livro-800w.webp 800w"
+                            srcset="{base}/images/psicologa-danielle-gurgel-lendo-livro-400w.webp 400w, {base}/images/psicologa-danielle-gurgel-lendo-livro-800w.webp 800w"
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                         <img
-                            src="/images/psicologa-danielle-gurgel-lendo-livro-800w.webp"
+                            src="{base}/images/psicologa-danielle-gurgel-lendo-livro-800w.webp"
                             alt="Psicóloga Danielle Gurgel"
                             class="w-full h-auto rounded-3xl shadow-lg object-cover"
                         />
