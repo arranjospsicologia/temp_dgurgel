@@ -4,19 +4,16 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: vitePreprocess(),
-
 	kit: {
-		appDir: 'app',
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
 			fallback: '404.html',
 			precompress: false,
-			strict: false,
-			inlineStyleThreshold: 50000
+			strict: true
 		}),
 		paths: {
-			base: process.argv.includes('dev') ? '' : '/temp_dgurgel',
+			base: process.argv.includes('dev') ? '' : '',
 			relative: false
 		}
 	}

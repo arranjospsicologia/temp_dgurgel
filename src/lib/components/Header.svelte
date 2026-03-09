@@ -1,285 +1,164 @@
 <script lang="ts">
-    import { Menu, X, ChevronDown } from "lucide-svelte";
-    import { Button } from "$lib";
+    import { page } from "$app/stores";
     import { onMount } from "svelte";
 
-    let isMenuOpen = $state(false);
-    let servicesOpen = $state(false);
-    let experiencesOpen = $state(false);
-    let headerElement: HTMLElement;
-    let menuBtn: HTMLButtonElement;
-
-    function toggleMenu(e?: Event) {
-        if (e) {
-            e.stopPropagation();
-            e.preventDefault();
-        }
-        isMenuOpen = !isMenuOpen;
-        if (!isMenuOpen) {
-            servicesOpen = false;
-            experiencesOpen = false;
-            // Unlock body scroll if needed, though not currently implemented in CSS
-        }
-    }
-
-    function closeMenu() {
-        isMenuOpen = false;
-        servicesOpen = false;
-        experiencesOpen = false;
-    }
-
-    function closeDropdowns() {
-        servicesOpen = false;
-        experiencesOpen = false;
-    }
-
-    function handleClickOutside(event: MouseEvent) {
-        if (headerElement && !headerElement.contains(event.target as Node)) {
-            closeDropdowns();
-        }
-    }
+    let isScrolled = false;
+    let isMenuOpen = false;
 
     onMount(() => {
-        // Robust fallback: manually attach listener to bypass potential hydration delegation issues
-        if (menuBtn) {
-            menuBtn.addEventListener("click", toggleMenu);
-        }
-
-        return () => {
-            if (menuBtn) {
-                menuBtn.removeEventListener("click", toggleMenu);
-            }
+        const handleScroll = () => {
+            isScrolled = window.scrollY > 20;
         };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
     });
 
-    const servicos = [
-        {
-            name: "Psicoterapia Individual",
-            href: "/servicos/psicoterapia-individual/",
-        },
-        { name: "Terapia Online", href: "/servicos/terapia-online/" },
-        { name: "Terapia de Casal", href: "/servicos/terapia-de-casal/" },
-    ];
+    function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+    }
 
-    const experiencias = [
-        { name: "Ansiedade", href: "/experiencia/ansiedade/" },
-        { name: "Depressão", href: "/experiencia/depressao/" },
-        { name: "Burnout", href: "/experiencia/burnout/" },
-        { name: "Relacionamentos", href: "/experiencia/relacionamento/" },
-        { name: "Autoestima", href: "/experiencia/autoestima/" },
+    const links = [
+        { href: "/", label: "Início" },
+        { href: "/sobre", label: "Sobre a Psicóloga" },
+        { href: "/servicos/psicoterapia-individual", label: "Psicoterapia" },
+        {
+            href: "/psicologa-mulheres-higienopolis",
+            label: "Psicologia para Mulheres",
+        },
+        { href: "/artigos", label: "Artigos" },
     ];
 </script>
 
-<svelte:window onclick={handleClickOutside} />
-
-<header class="header glass" bind:this={headerElement}>
-    <nav class="container nav">
-        <a href="/" class="logo" onclick={closeMenu}>
+<header
+    class="fixed w-full z-50 transition-all duration-300 {isScrolled
+        ? 'bg-secondary-light/95 backdrop-blur-md shadow-sm py-3'
+        : 'bg-transparent py-5'}"
+>
+    <div
+        class="container mx-auto px-4 md:px-6 flex justify-between items-center max-w-7xl"
+    >
+        <!-- Logo -->
+        <a
+            href="/"
+            class="flex items-center gap-3 z-50"
+            aria-label="Página Inicial do Consultório Danielle Gurgel"
+        >
             <img
                 src="/images/logo.avif"
-                alt="Psicóloga Danielle Gurgel"
-                class="logo-img"
-                width="120"
-                height="50"
-                fetchpriority="high"
+                alt="Logo Danielle Gurgel"
+                width="45"
+                height="45"
+                class="w-10 h-10 md:w-12 md:h-12 object-contain"
             />
+            <div class="flex flex-col">
+                <span
+                    class="font-heading font-medium text-lg md:text-xl text-primary-dark tracking-wide leading-tight"
+                    >Danielle Gurgel</span
+                >
+                <span
+                    class="font-sans text-xs text-secondary-dark tracking-widest uppercase mt-0.5"
+                    >Psicóloga Clínica</span
+                >
+            </div>
         </a>
 
         <!-- Desktop Navigation -->
-        <ul class="nav-list">
-            <li><a href="/" class="nav-link">Início</a></li>
-            <li><a href="/sobre/" class="nav-link">Sobre</a></li>
-
-            <!-- Serviços Dropdown -->
-            <li class="dropdown">
-                <button
-                    class="nav-link dropdown-trigger"
-                    onclick={() => (
-                        (servicesOpen = !servicesOpen),
-                        servicesOpen && (experiencesOpen = false)
-                    )}
-                >
-                    Serviços <ChevronDown
-                        size={16}
-                        class={servicesOpen ? "chevron open" : "chevron"}
-                    />
-                </button>
-                <ul class="dropdown-menu" class:open={servicesOpen}>
-                    {#each servicos as servico}
-                        <li>
-                            <a
-                                href={servico.href}
-                                class="dropdown-link"
-                                onclick={closeDropdowns}>{servico.name}</a
-                            >
-                        </li>
-                    {/each}
-                </ul>
-            </li>
-
-            <!-- Experiências Dropdown -->
-            <li class="dropdown">
-                <button
-                    class="nav-link dropdown-trigger"
-                    onclick={() => (
-                        (experiencesOpen = !experiencesOpen),
-                        experiencesOpen && (servicesOpen = false)
-                    )}
-                >
-                    Experiência <ChevronDown
-                        size={16}
-                        class={experiencesOpen ? "chevron open" : "chevron"}
-                    />
-                </button>
-                <ul class="dropdown-menu" class:open={experiencesOpen}>
-                    {#each experiencias as experiencia}
-                        <li>
-                            <a
-                                href={experiencia.href}
-                                class="dropdown-link"
-                                onclick={closeDropdowns}>{experiencia.name}</a
-                            >
-                        </li>
-                    {/each}
-                </ul>
-            </li>
-
-            <li><a href="/artigos/" class="nav-link">Artigos</a></li>
-            <li><a href="/contato/" class="nav-link">Contato</a></li>
-        </ul>
-
-        <div class="nav-cta">
-            <Button
-                href="https://wa.me/5511932037191?text=Olá,%20vi%20seu%20site%20e%20gostaria%20de%20agendar%20uma%20consulta."
-                variant="primary"
-                size="sm">Conversar</Button
-            >
-        </div>
-
-        <!-- Mobile Menu Toggle -->
-        <button class="nav-toggle" bind:this={menuBtn} aria-label="Menu">
-            {#if isMenuOpen}
-                <X size={24} />
-            {:else}
-                <Menu size={24} />
-            {/if}
-        </button>
-    </nav>
-
-    <!-- Mobile Menu Overlay -->
-    <div
-        class="mobile-overlay"
-        class:open={isMenuOpen}
-        onclick={closeMenu}
-        onkeydown={(e) => e.key === "Escape" && closeMenu()}
-        role="button"
-        tabindex="-1"
-        aria-label="Fechar menu"
-    ></div>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" class:open={isMenuOpen}>
-        <div class="mobile-menu-header">
-            <button
-                class="mobile-close-btn"
-                onclick={closeMenu}
-                aria-label="Fechar menu"
-            >
-                <X size={24} />
-            </button>
-        </div>
-        <nav class="mobile-nav-container">
-            <ul class="mobile-nav">
-                <li>
-                    <a href="/" class="mobile-link" onclick={closeMenu}>
-                        <span>Início</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/sobre/" class="mobile-link" onclick={closeMenu}>
-                        <span>Sobre</span>
-                    </a>
-                </li>
-
-                <li class="mobile-dropdown">
-                    <button
-                        class="mobile-link mobile-dropdown-trigger"
-                        onclick={() => {
-                            servicesOpen = !servicesOpen;
-                            if (servicesOpen) experiencesOpen = false;
-                        }}
-                        aria-expanded={servicesOpen}
-                    >
-                        <span>Serviços</span>
-                        <ChevronDown
-                            size={20}
-                            class={servicesOpen ? "chevron open" : "chevron"}
-                        />
-                    </button>
-                    <ul class="mobile-submenu" class:open={servicesOpen}>
-                        {#each servicos as servico}
-                            <li>
-                                <a
-                                    href={servico.href}
-                                    class="mobile-sublink"
-                                    onclick={closeMenu}
-                                >
-                                    {servico.name}
-                                </a>
-                            </li>
-                        {/each}
-                    </ul>
-                </li>
-
-                <li class="mobile-dropdown">
-                    <button
-                        class="mobile-link mobile-dropdown-trigger"
-                        onclick={() => {
-                            experiencesOpen = !experiencesOpen;
-                            if (experiencesOpen) servicesOpen = false;
-                        }}
-                        aria-expanded={experiencesOpen}
-                    >
-                        <span>Experiência</span>
-                        <ChevronDown
-                            size={20}
-                            class={experiencesOpen ? "chevron open" : "chevron"}
-                        />
-                    </button>
-                    <ul class="mobile-submenu" class:open={experiencesOpen}>
-                        {#each experiencias as experiencia}
-                            <li>
-                                <a
-                                    href={experiencia.href}
-                                    class="mobile-sublink"
-                                    onclick={closeMenu}
-                                >
-                                    {experiencia.name}
-                                </a>
-                            </li>
-                        {/each}
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="/artigos/" class="mobile-link" onclick={closeMenu}>
-                        <span>Artigos</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/contato/" class="mobile-link" onclick={closeMenu}>
-                        <span>Contato</span>
-                    </a>
-                </li>
+        <nav class="hidden lg:flex items-center gap-8">
+            <ul class="flex gap-6 items-center m-0 p-0 list-none">
+                {#each links as { href, label }}
+                    <li>
+                        <a
+                            {href}
+                            class="text-sm font-medium tracking-wide transition-colors duration-200
+                {$page.url.pathname === href
+                                ? 'text-primary-dark font-bold'
+                                : 'text-gray-600 hover:text-primary'}"
+                        >
+                            {label}
+                        </a>
+                    </li>
+                {/each}
             </ul>
+
+            <a
+                href="https://wa.me/5511932037191?text=Olá!%20Gostaria%20de%20agendar%20uma%20primeira%20sessão."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-gradient-to-r from-primary to-primary-dark text-white px-6 py-2.5 rounded-full text-sm font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shadow-md"
+            >
+                Agendar Consulta
+            </a>
         </nav>
 
-        <div class="mobile-cta">
-            <Button
-                href="https://wa.me/5527998331228?text=Olá,%20vi%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20terapia."
-                variant="primary"
-                onclick={closeMenu}>Conversar</Button
+        <!-- Mobile Menu Button -->
+        <button
+            class="lg:hidden z-50 p-2 text-primary-dark"
+            on:click={toggleMenu}
+            aria-label="Alternar menu de navegação"
+            aria-expanded={isMenuOpen}
+        >
+            <div class="w-6 flex flex-col items-end gap-1.5">
+                <span
+                    class="block h-0.5 bg-current transition-all duration-300 w-full {isMenuOpen
+                        ? 'rotate-45 translate-y-2'
+                        : ''}"
+                ></span>
+                <span
+                    class="block h-0.5 bg-current transition-all duration-300 {isMenuOpen
+                        ? 'opacity-0 w-full'
+                        : 'w-4/5'}"
+                ></span>
+                <span
+                    class="block h-0.5 bg-current transition-all duration-300 w-full {isMenuOpen
+                        ? '-rotate-45 -translate-y-2'
+                        : ''}"
+                ></span>
+            </div>
+        </button>
+
+        <!-- Mobile Navigation Overlay -->
+        {#if isMenuOpen}
+            <div
+                class="fixed inset-0 bg-secondary-light/98 backdrop-blur z-40 lg:hidden flex flex-col justify-center items-center h-screen w-full"
             >
-        </div>
+                <nav
+                    class="flex flex-col items-center gap-8 text-center px-4 w-full"
+                >
+                    <ul
+                        class="flex flex-col gap-6 m-0 p-0 list-none text-xl w-full"
+                    >
+                        {#each links as { href, label }}
+                            <li>
+                                <a
+                                    {href}
+                                    class="font-heading font-medium transition-colors {$page
+                                        .url.pathname === href
+                                        ? 'text-primary-dark'
+                                        : 'text-gray-800'}"
+                                    on:click={() => (isMenuOpen = false)}
+                                >
+                                    {label}
+                                </a>
+                            </li>
+                        {/each}
+                    </ul>
+
+                    <div class="w-full max-w-xs mt-4">
+                        <a
+                            href="https://wa.me/5511932037191?text=Olá!%20Gostaria%20de%20agendar%20uma%20primeira%20sessão."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="block w-full bg-primary-dark text-white items-center justify-center text-center px-6 py-4 rounded-full font-medium shadow-md"
+                            on:click={() => (isMenuOpen = false)}
+                        >
+                            Agendar Pelo WhatsApp
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        {/if}
     </div>
 </header>
+
+<!-- Spacer to prevent content overlapping with fixed header -->
+<div class="h-20 md:h-24 w-full bg-transparent"></div>

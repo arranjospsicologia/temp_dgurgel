@@ -1,220 +1,115 @@
 <script lang="ts">
-    import { Button } from "$lib";
-    import { ChevronDown } from "lucide-svelte";
+    import SEO from "$lib/components/SEO.svelte";
 
-    const SITE_URL = "https://psicologadaniellegurgel.com.br";
-    let openFaq = $state(-1);
-    function toggleFaq(i: number) {
-        openFaq = openFaq === i ? -1 : i;
-    }
-
-    const faqs = [
-        {
-            question: "Como funciona a psicoterapia individual?",
-            answer: "As sessões acontecem geralmente uma vez por semana, com duração de 50 minutos. É um espaço seguro para que você possa explorar seus sentimentos, reflexões e desafios no seu próprio ritmo, sem julgamentos.",
-        },
-        {
-            question: "A terapeuta dá conselhos ou soluções prontas?",
-            answer: "Na Abordagem Centrada na Pessoa, o papel da terapeuta é facilitar o processo de autocompreensão. Não ofereço respostas prontas, mas ajudo você a encontrar suas próprias soluções, que tendem a ser mais eficazes e satisfatórias.",
-        },
-        {
-            question: "Quanto tempo dura o processo terapêutico?",
-            answer: "Não há prazo definido — cada pessoa tem seu ritmo. Algumas questões se beneficiam de um acompanhamento mais curto, outras pedem mais tempo. A duração depende de suas necessidades e objetivos.",
-        },
-        {
-            question: "Preciso ter um problema grave para fazer terapia?",
-            answer: "Não. A terapia é para qualquer pessoa que busca autoconhecimento, crescimento pessoal ou apoio emocional. Você não precisa estar em crise para se beneficiar do processo terapêutico.",
-        },
-        {
-            question: "Atende plano de saúde?",
-            answer: "Os atendimentos são particulares, mas muitos planos oferecem reembolso. Após cada sessão, forneço os documentos necessários para que você solicite junto à sua operadora.",
-        },
-    ];
-
-    const jsonLd = {
+    const serviceSchema = {
         "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "Service",
-                "@id": `${SITE_URL}/servicos/psicoterapia-individual/#service`,
-                name: "Psicoterapia Individual em Higienópolis",
-                description:
-                    "Atendimento psicológico individual com base na Abordagem Centrada na Pessoa. Sessões presenciais em Higienópolis, São Paulo.",
-                provider: { "@id": `${SITE_URL}/#organization` },
-                areaServed: { "@type": "City", name: "São Paulo" },
-                serviceType: "Psicoterapia Individual",
-            },
-            {
-                "@type": "FAQPage",
-                "@id": `${SITE_URL}/servicos/psicoterapia-individual/#faqpage`,
-                mainEntity: faqs.map((f) => ({
-                    "@type": "Question",
-                    name: f.question,
-                    acceptedAnswer: { "@type": "Answer", text: f.answer },
-                })),
-            },
-        ],
+        "@type": "TherapeuticProcedure",
+        name: "Psicoterapia Individual Presencial",
+        description:
+            "Sessões presenciais de psicoterapia com a psicóloga Danielle Gurgel na Av. Angélica, Higienópolis.",
+        provider: {
+            "@id": "https://psicologadaniellegurgel.com/sobre#danielle",
+        },
     };
 </script>
 
-<svelte:head>
-    <title>Psicoterapia Individual em Higienópolis | Danielle Gurgel</title>
-    <meta
-        name="description"
-        content="Psicoterapia individual humanizada em Higienópolis, São Paulo. Abordagem Centrada na Pessoa com escuta empática. Agende sua consulta."
-    />
-    <link rel="canonical" href="{SITE_URL}/servicos/psicoterapia-individual/" />
-    {@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
-</svelte:head>
+<SEO
+    title="Psicoterapia Individual em Higienópolis | Psicóloga SP"
+    description="Sessões de psicoterapia focadas em mulheres. O consultório em Higienópolis oferece sigilo, ética absoluta e a Abordagem Centrada na Pessoa."
+    schemas={[serviceSchema]}
+/>
 
-<nav class="breadcrumb" aria-label="Navegação estrutural">
-    <ol class="container">
-        <li><a href="/">Início</a></li>
-        <li><a href="/#servicos">Serviços</a></li>
-        <li aria-current="page">Psicoterapia Individual</li>
-    </ol>
-</nav>
-
-<section class="service-hero">
-    <div class="container">
-        <h1>Psicoterapia Individual</h1>
-        <p class="hero-subtitle">
-            Um espaço seguro para autoconhecimento, crescimento pessoal e
-            bem-estar emocional
-        </p>
-    </div>
-</section>
-
-<section class="section bg-white">
-    <div class="container service-content">
-        <h2>Como funciona o atendimento</h2>
-        <p>
-            A psicoterapia individual é um processo de autoconhecimento e
-            crescimento pessoal. As sessões acontecem semanalmente, com duração
-            de 50 minutos, em um ambiente acolhedor e confidencial.
-        </p>
-        <p>
-            Na Abordagem Centrada na Pessoa, você é visto como protagonista do
-            seu próprio processo. Meu papel é oferecer uma escuta empática,
-            genuína e sem julgamentos, criando condições para que você explore
-            seus sentimentos, identifique padrões e encontre seus próprios
-            caminhos.
-        </p>
-
-        <h2>Para quem é indicada</h2>
-        <p>
-            A psicoterapia individual é indicada para qualquer pessoa que
-            busque:
-        </p>
-        <ul>
-            <li>Autoconhecimento e desenvolvimento pessoal</li>
-            <li>Apoio emocional em momentos de transição</li>
-            <li>Lidar com ansiedade, estresse ou dificuldades emocionais</li>
-            <li>Melhorar relacionamentos pessoais e profissionais</li>
-            <li>Fortalecer a autoestima e a confiança em si mesmo</li>
-        </ul>
-
-        <h2>O que esperar das sessões</h2>
-        <p>
-            Não existe um "roteiro" pré-definido. O ritmo e os temas são
-            conduzidos por você, conforme suas necessidades. A confiança se
-            constrói gradualmente — e respeito profundamente o seu tempo.
-        </p>
-        <p>
-            Diferente de abordagens diretivas, na ACP eu não ofereço
-            diagnósticos rígidos ou soluções prontas. Acredito que as soluções
-            que surgem do seu próprio processo de reflexão são mais eficazes e
-            duradouras.
-        </p>
-    </div>
-</section>
-
-<section class="section bg-secondary">
-    <div class="container">
-        <div
-            class="section-header"
-            style="padding-left: 1.5rem; text-align: left; position: relative;"
-        >
-            <h2>Perguntas Frequentes</h2>
-        </div>
-        <div class="faq-container">
-            {#each faqs as faq, i}
-                <div class="faq-item">
-                    <button
-                        class="faq-question"
-                        onclick={() => toggleFaq(i)}
-                        aria-expanded={openFaq === i}
-                    >
-                        <span>{faq.question}</span>
-                        <ChevronDown
-                            size={20}
-                            class={openFaq === i ? "chevron open" : "chevron"}
-                        />
-                    </button>
-                    {#if openFaq === i}
-                        <div class="faq-answer"><p>{faq.answer}</p></div>
-                    {/if}
-                </div>
-            {/each}
-        </div>
-    </div>
-</section>
-
-<section class="section gradient-cta">
-    <div class="container">
-        <div class="cta-content">
-            <h2>Pronta para acolher você</h2>
-            <p>
-                Agende uma consulta e descubra como a psicoterapia pode
-                transformar sua relação consigo mesmo.
-            </p>
-            <Button
-                href="https://wa.me/5511932037191?text=Olá,%20gostaria%20de%20agendar%20uma%20consulta%20de%20psicoterapia%20individual."
-                variant="white"
-                size="lg">Agendar Consulta</Button
+<div class="breadcrumb pt-32 pb-8 bg-secondary border-b border-border-light">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li
+                itemprop="itemListElement"
+                itemscope
+                itemtype="https://schema.org/ListItem"
             >
+                <a itemprop="item" href="/"
+                    ><span itemprop="name">Início</span></a
+                >
+                <meta itemprop="position" content="1" />
+            </li>
+            <li
+                itemprop="itemListElement"
+                itemscope
+                itemtype="https://schema.org/ListItem"
+                aria-current="page"
+            >
+                <span itemprop="name" class="text-text-light"
+                    >Psicoterapia Individual</span
+                >
+                <meta itemprop="position" content="2" />
+            </li>
+        </ol>
+    </div>
+</div>
+
+<article class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <header class="mb-12">
+            <h1 class="text-4xl md:text-5xl font-heading text-black mb-6">
+                Psicoterapia Individual (Presencial)
+            </h1>
+            <p class="text-xl text-primary-dark font-medium leading-relaxed">
+                O formato clássico, focado na Abordagem Centrada na Pessoa,
+                resgatando seu tempo inegociável dentro da rotina de São Paulo.
+            </p>
+        </header>
+
+        <div class="prose prose-lg text-gray-700 max-w-none space-y-8">
+            <p>
+                A <strong>Psicoterapia Individual</strong> é o núcleo do acompanhamento
+                psicológico. Em um mundo de hiperconectividade, as sessões presenciais
+                no consultório garantem 50 minutos onde nada externo importará. Nenhuma
+                notificação, demanda profissional ou familiar interromperá o seu
+                cuidado emocional.
+            </p>
+
+            <h2 class="text-2xl font-heading text-black mt-12 mb-4">
+                Como funciona o atendimento presencial?
+            </h2>
+            <p>
+                O consultório de Danielle Gurgel está localizado na <strong
+                    >Av. Angélica, 1996 - Higienópolis</strong
+                >. Atravessar a cidade e dedicar tempo logístico a si mesma já é
+                a primeira intervenção clínica para mulheres exaustas por uma
+                rotina de sacrifícios.
+            </p>
+
+            <div
+                class="bg-secondary p-8 rounded-3xl mt-10 border border-transparent"
+            >
+                <h3 class="text-xl font-heading text-primary-dark m-0 mb-4">
+                    Sobre a Primeira Sessão (Avaliação Mútua)
+                </h3>
+                <p class="m-0 mb-4 text-gray-700">
+                    O primeiro encontro é focado em escutar o panorama geral que
+                    a motivou a buscar ajuda. Não existem obrigações de
+                    comprometimento imediato. A primeira sessão serve para você
+                    avaliar a minha ética de trabalho, e para que eu conheça os
+                    desafios que estão travando a sua saúde mental e determine a
+                    viabilidade clínica do nosso trabalho conjunto.
+                </p>
+            </div>
         </div>
     </div>
-</section>
+</article>
 
-<section class="section bg-white">
-    <div class="container">
-        <div class="related-links">
-            <h3>Veja também</h3>
-            <ul>
-                <li><a href="/servicos/terapia-online/">Terapia Online</a></li>
-                <li>
-                    <a href="/servicos/terapia-de-casal/">Terapia de Casal</a>
-                </li>
-                <li><a href="/experiencia/ansiedade/">Ansiedade</a></li>
-                <li><a href="/experiencia/depressao/">Depressão</a></li>
-            </ul>
-        </div>
+<section class="py-16 bg-gradient-cta text-center text-white">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <h2 class="text-3xl font-heading text-white mb-6">
+            Dê o primeiro passo
+        </h2>
+        <a
+            href="https://wa.me/5511932037191?text=Olá!%20Desejo%20agendar%20uma%20Psicoterapia%20Individual%20presencial%20em%20Higienópolis."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-lg bg-white text-primary-dark shadow-hover hover:-translate-y-1 mt-4 font-bold"
+        >
+            Agendar Sessão Presencial via WhatsApp
+        </a>
     </div>
 </section>
-
-<style>
-    .service-content ul {
-        margin: 1rem 0 1.5rem 1.5rem;
-    }
-    .service-content li {
-        margin-bottom: 0.75rem;
-        line-height: 1.7;
-        list-style: disc;
-        color: var(--text-light);
-    }
-    .cta-content {
-        text-align: center;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    .cta-content h2 {
-        color: var(--white);
-        margin-bottom: 1rem;
-    }
-    .cta-content p {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: var(--text-lg);
-        margin-bottom: 2rem;
-    }
-</style>

@@ -1,270 +1,112 @@
 <script lang="ts">
-    import { Button } from "$lib";
-    import { Phone, Calendar, Clock, Search, ArrowRight } from "lucide-svelte";
-    import { blogPosts, categories, filterPosts } from "$lib/data/blog";
+    import SEO from "$lib/components/SEO.svelte";
 
-    let searchTerm = $state("");
-    let selectedCategory = $state("todos");
-
-    let filteredPosts = $derived(
-        filterPosts(blogPosts, selectedCategory, searchTerm),
-    );
-
-    const SITE_URL = "https://psicologadaniellegurgel.com.br";
-
-    const blogSchema = {
+    const articlesSchema = {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        name: "Artigos — Psicóloga Danielle Gurgel",
+        name: "Artigos de Psicologia por Danielle Gurgel",
         description:
-            "Reflexões sobre psicoterapia, autoconhecimento e saúde mental por Danielle Gurgel",
-        url: `${SITE_URL}/artigos/`,
-        author: {
-            "@type": "Person",
-            name: "Danielle Gurgel da Fonseca",
-            jobTitle: "Psicóloga",
-        },
+            "Textos autorais sobre saúde mental feminina, burnout, relacionamentos e maternidade.",
+        url: "https://psicologadaniellegurgel.com/artigos",
     };
+
+    const articles = [
+        {
+            title: "Como a cultura corporativa acelera quadros de Burnout em mulheres",
+            excerpt:
+                "Exploramos por que mulheres sofrem de esgotamento profissional em uma taxa 30% maior que homens em cargos de liderança semelhantes.",
+            link: "#", // placeholder for future article
+            category: "Carreira & Burnout",
+        },
+        {
+            title: "O peso do silêncio: a codependência emocional nas famílias paulistanas",
+            excerpt:
+                "Como identificar os limites invisíveis nas relações familiares e resgatar o direito de priorizar as próprias emoções.",
+            link: "#",
+            category: "Relacionamentos",
+        },
+        {
+            title: "Síndrome do Ninho Vazio: Redescobrindo o indivíduo após os 50 anos",
+            excerpt:
+                "A saída dos filhos de casa não é o fim de um papel, mas o recomeço da sua história individual esquecida na juventude.",
+            link: "#",
+            category: "Transições de Vida",
+        },
+    ];
 </script>
 
-<svelte:head>
-    <title>Artigos | Psicóloga Danielle Gurgel</title>
-    <meta
-        name="description"
-        content="Artigos sobre psicoterapia, autoconhecimento e saúde mental por Danielle Gurgel, psicóloga em Higienópolis, São Paulo — CRP/SP 06/148054."
-    />
-    <link rel="canonical" href="{SITE_URL}/artigos/" />
-    {@html `<script type="application/ld+json">${JSON.stringify(blogSchema)}</script>`}
-</svelte:head>
+<SEO
+    title="Artigos sobre Saúde Mental Feminina | Psicóloga Danielle Gurgel"
+    description="Leia textos autorais e especializados em psicologia clínica focada em mulheres. Informação segura escrita pela psicóloga Danielle Gurgel."
+    schemas={[articlesSchema]}
+/>
 
-<nav class="breadcrumb" aria-label="Navegação estrutural">
-    <ol class="container">
-        <li><a href="/">Início</a></li>
-        <li aria-current="page">Artigos</li>
-    </ol>
-</nav>
-
-<section class="blog-hero">
-    <div class="container">
-        <h1>Artigos</h1>
-        <p>Reflexões sobre psicoterapia, autoconhecimento e saúde mental</p>
-    </div>
-</section>
-
-<section class="section bg-white">
-    <div class="container">
-        <div class="blog-controls">
-            <div class="search-wrapper">
-                <Search size={18} />
-                <input
-                    type="text"
-                    placeholder="Buscar artigos..."
-                    class="search-input"
-                    bind:value={searchTerm}
-                />
-            </div>
-            <select class="filter-select" bind:value={selectedCategory}>
-                {#each categories as cat}
-                    <option value={cat.id}>{cat.label}</option>
-                {/each}
-            </select>
-        </div>
-
-        <div class="blog-grid">
-            {#if filteredPosts.length === 0}
-                <div class="no-results">
-                    <p>Nenhum artigo encontrado.</p>
-                </div>
-            {:else}
-                {#each filteredPosts as post}
-                    <a
-                        href="/{post.categorySlug}/{post.slug}"
-                        class="blog-card"
-                    >
-                        <div class="blog-image">
-                            <img
-                                src={post.image}
-                                alt={post.altText || post.title}
-                                loading="lazy"
-                                width="350"
-                                height="233"
-                            />
-                            <div class="blog-category">{post.category}</div>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span><Calendar size={14} /> {post.date}</span>
-                                <span><Clock size={14} /> {post.readTime}</span>
-                            </div>
-                            <h2>{post.title}</h2>
-                            <p>{post.description}</p>
-                            <span class="blog-link">
-                                Ler mais <ArrowRight size={16} />
-                            </span>
-                        </div>
-                    </a>
-                {/each}
-            {/if}
-        </div>
-    </div>
-</section>
-
-<section class="section gradient-cta">
-    <div class="container">
-        <div class="cta-content">
-            <h2>Gostou do que leu?</h2>
-            <p>Talvez seja um bom momento para conversar.</p>
-            <Button
-                href="https://wa.me/5511932037191?text=Olá,%20gostei%20do%20seu%20texto%20no%20blog%20e%20gostaria%20de%20conversar"
-                variant="white"
-                size="lg"
+<div class="breadcrumb pt-32 pb-8 bg-secondary border-b border-border-light">
+    <div class="container mx-auto px-4 max-w-5xl">
+        <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li
+                itemprop="itemListElement"
+                itemscope
+                itemtype="https://schema.org/ListItem"
             >
-                <Phone size={20} />
-                Falar no WhatsApp
-            </Button>
+                <a itemprop="item" href="/"
+                    ><span itemprop="name">Início</span></a
+                >
+                <meta itemprop="position" content="1" />
+            </li>
+            <li
+                itemprop="itemListElement"
+                itemscope
+                itemtype="https://schema.org/ListItem"
+                aria-current="page"
+            >
+                <span itemprop="name" class="text-text-light">Artigos</span>
+                <meta itemprop="position" content="2" />
+            </li>
+        </ol>
+    </div>
+</div>
+
+<article class="py-16 bg-white min-h-[60vh]">
+    <div class="container mx-auto px-4 max-w-5xl">
+        <header class="mb-16">
+            <h1 class="text-4xl md:text-5xl font-heading text-black mb-6">
+                Artigos & Reflexões Clínicas
+            </h1>
+            <p
+                class="text-xl text-primary-dark font-medium leading-relaxed max-w-3xl"
+            >
+                Informações baseadas na Abordagem Centrada na Pessoa, focadas no
+                desenvolvimento e acolhimento da psique feminina na atualidade.
+            </p>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            {#each articles as article}
+                <div
+                    class="border border-border-light rounded-2xl p-8 hover:shadow-lg transition-all duration-300 flex flex-col items-start bg-secondary-light/30"
+                >
+                    <span
+                        class="inline-block px-3 py-1 bg-white border border-primary/20 text-primary-dark text-xs font-bold uppercase tracking-wider rounded-full mb-4"
+                    >
+                        {article.category}
+                    </span>
+                    <h2
+                        class="text-2xl font-heading text-black mb-4 leading-tight"
+                    >
+                        {article.title}
+                    </h2>
+                    <p class="text-gray-600 mb-6 flex-grow">
+                        {article.excerpt}
+                    </p>
+                    <a
+                        href={article.link}
+                        class="text-primary font-medium hover:text-primary-dark transition-colors border-b border-primary pb-0.5"
+                    >
+                        Ler artigo completo
+                    </a>
+                </div>
+            {/each}
         </div>
     </div>
-</section>
-
-<style>
-    .blog-hero {
-        background: var(--secondary-color);
-        padding: calc(var(--header-height) + 3rem) 0 3rem;
-        text-align: center;
-    }
-    .blog-hero p {
-        color: var(--text-light);
-        font-size: var(--text-lg);
-        margin-top: 0.5rem;
-    }
-    .blog-controls {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
-    }
-    .search-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        flex: 1;
-        min-width: 200px;
-        background: var(--secondary-light);
-        border-radius: var(--radius-sm);
-        padding: 0.5rem 1rem;
-    }
-    .search-wrapper :global(svg) {
-        color: var(--text-lighter);
-    }
-    .search-input {
-        border: none;
-        background: none;
-        flex: 1;
-        font-size: var(--text-base);
-        outline: none;
-    }
-    .filter-select {
-        padding: 0.5rem 1rem;
-        border: 1px solid var(--border-light);
-        border-radius: var(--radius-sm);
-        font-size: var(--text-sm);
-        background: var(--white);
-    }
-    .blog-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-    .blog-card {
-        text-decoration: none;
-        color: inherit;
-        background: var(--secondary-light);
-        border-radius: var(--radius-md);
-        overflow: hidden;
-        transition: var(--transition);
-        border: 1px solid var(--border-light);
-    }
-    .blog-card:hover {
-        transform: scale(1.02);
-        box-shadow: var(--shadow-hover);
-        color: inherit;
-    }
-    .blog-image {
-        position: relative;
-        overflow: hidden;
-    }
-    .blog-image img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-    .blog-category {
-        position: absolute;
-        top: 0.75rem;
-        left: 0.75rem;
-        background: var(--primary-color);
-        color: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: var(--radius-full);
-        font-size: var(--text-xs);
-        font-weight: 600;
-    }
-    .blog-content {
-        padding: 1.25rem;
-    }
-    .blog-meta {
-        display: flex;
-        gap: 1rem;
-        color: var(--text-lighter);
-        font-size: var(--text-xs);
-        margin-bottom: 0.5rem;
-    }
-    .blog-meta span {
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-    }
-    .blog-content h2 {
-        font-size: var(--text-lg);
-        margin-bottom: 0.5rem;
-        line-height: 1.4;
-    }
-    .blog-content p {
-        color: var(--text-light);
-        font-size: var(--text-sm);
-        line-height: 1.6;
-        margin-bottom: 0.75rem;
-    }
-    .blog-link {
-        color: var(--primary-color);
-        font-weight: 600;
-        font-size: var(--text-sm);
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-    }
-    .no-results {
-        text-align: center;
-        padding: 3rem;
-        color: var(--text-lighter);
-    }
-    .cta-content {
-        text-align: center;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    .cta-content h2 {
-        color: var(--white);
-        margin-bottom: 1rem;
-    }
-    .cta-content p {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: var(--text-lg);
-        margin-bottom: 2rem;
-    }
-    @media (max-width: 768px) {
-        .blog-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
+</article>

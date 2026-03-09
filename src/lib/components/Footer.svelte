@@ -1,133 +1,173 @@
 <script lang="ts">
-    import { MapPin, Phone, Mail, ExternalLink } from "lucide-svelte";
+    const currentYear = new Date().getFullYear();
 </script>
 
-<footer class="footer">
-    <div class="container footer-grid">
-        <!-- Column 1: Logo & About -->
-        <div class="footer-col">
-            <a href="/" class="footer-logo">
-                <img
-                    src="/images/logo.avif"
-                    alt="Psicóloga Danielle Gurgel"
-                    width="150"
-                    height="60"
-                />
-            </a>
-            <p class="footer-about">
-                Psicoterapia humanizada com base na Abordagem Centrada na
-                Pessoa. Um espaço de acolhimento, escuta e autoconhecimento em
-                Higienópolis, São Paulo.
-            </p>
-        </div>
-
-        <!-- Column 2: Services -->
-        <div class="footer-col">
-            <h3 class="footer-title">Serviços</h3>
-            <ul class="footer-list">
-                <li class="footer-item">
-                    <a href="/servicos/psicoterapia-individual/"
-                        >Psicoterapia Individual</a
-                    >
-                </li>
-                <li class="footer-item">
-                    <a href="/servicos/terapia-online/">Terapia Online</a>
-                </li>
-                <li class="footer-item">
-                    <a href="/servicos/terapia-de-casal/">Terapia de Casal</a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Column 3: Contact -->
-        <div class="footer-col">
-            <h3 class="footer-title">Contato</h3>
-            <ul class="footer-list">
-                <li class="footer-item">
-                    <MapPin size={18} />
-                    <span>
-                        Av. Angélica, 1996 - Sala 501<br />
-                        <a href="/localizacao/" class="address-link"
-                            >Higienópolis, São Paulo - SP</a
+<footer
+    class="bg-secondary text-gray-800 pt-16 pb-8 border-t border-border-light relative overflow-hidden"
+>
+    <div class="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-12"
+        >
+            <!-- Brand & About -->
+            <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                <div class="flex items-center gap-3 mb-6">
+                    <img
+                        src="/images/logo.avif"
+                        alt="Logo Danielle Gurgel"
+                        width="40"
+                        height="40"
+                        class="w-10 h-10 object-contain"
+                    />
+                    <div class="flex flex-col">
+                        <span
+                            class="font-heading font-medium text-lg text-primary-dark"
+                            >Danielle Gurgel</span
                         >
-                    </span>
-                </li>
-                <li class="footer-item">
-                    <Phone size={18} />
-                    <a href="tel:+5511932037191">(11) 93203-7191</a>
-                </li>
-                <li class="footer-item">
-                    <Mail size={18} />
-                    <a href="mailto:contato@psicologadaniellegurgel.com.br"
-                        >contato@psicologadaniellegurgel.com.br</a
-                    >
-                </li>
-            </ul>
-        </div>
+                        <span
+                            class="font-sans text-xs text-secondary-dark tracking-widest uppercase"
+                            >Psicóloga Clínica</span
+                        >
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                    Psicoterapia pautada na Abordagem Centrada na Pessoa,
+                    oferecendo escuta especializada, sigilo absoluto e um
+                    ambiente seguro para o cuidado da saúde mental de mulheres
+                    em São Paulo.
+                </p>
+                <p class="text-sm font-medium text-primary-dark">
+                    CRP: 06/148054
+                </p>
+            </div>
 
-        <!-- Column 4: Professional Info -->
-        <div class="footer-col">
-            <h3 class="footer-title">Regulamentação</h3>
+            <!-- Quick Links -->
+            <div>
+                <h3 class="font-heading font-bold text-lg text-gray-900 mb-6">
+                    Navegação
+                </h3>
+                <ul class="space-y-3 p-0 list-none">
+                    <li>
+                        <a
+                            href="/sobre"
+                            class="text-sm text-gray-600 hover:text-primary transition-colors"
+                            >Sobre a Psicóloga</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/servicos/psicoterapia-individual"
+                            class="text-sm text-gray-600 hover:text-primary transition-colors"
+                            >Psicoterapia Individual</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/psicologa-mulheres-higienopolis"
+                            class="text-sm text-gray-600 hover:text-primary transition-colors"
+                            >Psicóloga para Mulheres</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/experiencia/ansiedade-e-stress"
+                            class="text-sm text-gray-600 hover:text-primary transition-colors"
+                            >Ansiedade e Burnout</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/artigos"
+                            class="text-sm text-gray-600 hover:text-primary transition-colors"
+                            >Artigos</a
+                        >
+                    </li>
+                </ul>
+            </div>
 
-            <!-- CRP Number -->
-            <p class="crp-text">
-                <a
-                    href="https://cadastro.cfp.org.br/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+            <!-- GEO SEO NAP (Name, Address, Phone) - Essential for AEO/Local Search -->
+            <div class="col-span-1 md:col-span-2">
+                <h3 class="font-heading font-bold text-lg text-gray-900 mb-6">
+                    Consultório Higienópolis
+                </h3>
+                <address
+                    class="not-italic flex flex-col gap-4 text-sm text-gray-600"
                 >
-                    <strong>CRP/SP 06/148054</strong>
-                </a>
-            </p>
+                    <div class="flex gap-3">
+                        <svg
+                            class="w-5 h-5 text-primary shrink-0"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                            ></path><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                            ></path></svg
+                        >
+                        <div>
+                            <p class="font-medium text-gray-900">
+                                Endereço de Atendimento
+                            </p>
+                            <p>Av. Angélica, 1996 - Higienópolis</p>
+                            <p>São Paulo - SP, 01228-200</p>
+                            <a
+                                href="/localizacao/psicologia-higienopolis-sp"
+                                class="text-primary hover:text-primary-dark underline block mt-1"
+                                >Ver mapa completo</a
+                            >
+                        </div>
+                    </div>
 
-            <!-- Regulatory Links -->
-            <div class="regulation-links">
-                <a
-                    href="https://www.crpsp.org.br/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="reg-link"
-                >
-                    Conselho Regional de Psicologia - 6ª Região (SP)
-                </a>
-                <a
-                    href="https://site.cfp.org.br/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="reg-link"
-                >
-                    Conselho Federal de Psicologia
-                </a>
-                <a
-                    href="https://site.cfp.org.br/wp-content/uploads/2012/07/codigo_etica.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="reg-link"
-                >
-                    Código de Ética <ExternalLink size={11} />
-                </a>
-                <a
-                    href="https://site.cfp.org.br/wp-content/uploads/2018/05/RESOLU%C3%87%C3%83O-N%C2%BA-11-DE-11-DE-MAIO-DE-2018.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="reg-link"
-                >
-                    Resolução 11/2018 <ExternalLink size={11} />
-                </a>
+                    <div class="flex gap-3 mt-2">
+                        <svg
+                            class="w-5 h-5 text-primary shrink-0"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                            ></path></svg
+                        >
+                        <div>
+                            <p class="font-medium text-gray-900">
+                                Contato / WhatsApp
+                            </p>
+                            <a
+                                href="https://wa.me/5511932037191"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hover:text-primary transition-colors"
+                            >
+                                +55 (11) 93203-7191
+                            </a>
+                        </div>
+                    </div>
+                </address>
             </div>
         </div>
-    </div>
 
-    <div class="footer-bottom">
-        <div class="container footer-bottom-content">
-            <p>
-                &copy; {new Date().getFullYear()} Danielle Gurgel da Fonseca. Todos
-                os direitos reservados.
+        <div
+            class="pt-8 border-t border-gray-300 flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+            <p class="text-xs text-secondary-dark">
+                &copy; {currentYear} Danielle Gurgel. Todos os direitos reservados.
             </p>
-            <div class="legal-links">
-                <a href="/politica-privacidade/">Privacidade</a>
-                <span class="separator">•</span>
-                <a href="/termos-uso/">Termos</a>
+            <div class="flex gap-4">
+                <a
+                    href="/"
+                    class="text-xs text-secondary-dark hover:text-primary transition-colors"
+                    >Aviso de Privacidade</a
+                >
             </div>
         </div>
     </div>

@@ -4,7 +4,6 @@
  */
 
 import sharp from 'sharp';
-import { readdir, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -14,61 +13,49 @@ const STATIC_DIR = path.join(__dirname, 'static/images');
 
 // Image configurations
 const configs = [
-    // Hero images - need 300w and 450w variants
     {
-        source: 'hero/hero-600x800.jpg',
+        source: 'psicologa-danielle-gurgel-higienopolis-sp.avif',
         outputs: [
-            { width: 300, suffix: '-300w', formats: ['avif', 'webp'] },
             { width: 450, suffix: '-450w', formats: ['avif', 'webp'] },
-        ]
-    },
-    // Experiencia images - need 200w variants
-    {
-        source: 'experiencia/ansiedade.png',
-        outputs: [
-            { width: 200, suffix: '-200', formats: ['avif', 'webp'] },
+            { width: 800, suffix: '-800w', formats: ['avif', 'webp'] },
+            { width: 1200, suffix: '-1200w', formats: ['avif', 'webp'] },
         ]
     },
     {
-        source: 'experiencia/autoestima.png',
+        source: 'consultorio-psicologia-higienopolis-sp-01.avif',
         outputs: [
-            { width: 200, suffix: '-200', formats: ['avif', 'webp'] },
+            { width: 400, suffix: '-400w', formats: ['avif', 'webp'] },
+            { width: 800, suffix: '-800w', formats: ['avif', 'webp'] },
         ]
     },
     {
-        source: 'experiencia/burnout.png',
+        source: 'consultorio-psicologia-higienopolis-sp-02.avif',
         outputs: [
-            { width: 200, suffix: '-200', formats: ['avif', 'webp'] },
+            { width: 400, suffix: '-400w', formats: ['avif', 'webp'] },
+            { width: 800, suffix: '-800w', formats: ['avif', 'webp'] },
         ]
     },
     {
-        source: 'experiencia/depressao.png',
+        source: 'psicologa-danielle-gurgel-lendo-livro.avif',
         outputs: [
-            { width: 200, suffix: '-200', formats: ['avif', 'webp'] },
+            { width: 400, suffix: '-400w', formats: ['avif', 'webp'] },
+            { width: 800, suffix: '-800w', formats: ['avif', 'webp'] },
         ]
     },
     {
-        source: 'experiencia/relacionamento.png',
+        source: 'psicologa-danielle-gurgel-sobre.avif',
         outputs: [
-            { width: 200, suffix: '-200', formats: ['avif', 'webp'] },
+            { width: 400, suffix: '-400w', formats: ['avif', 'webp'] },
+            { width: 800, suffix: '-800w', formats: ['avif', 'webp'] },
         ]
     },
-    // Fachada madison - need WebP version + responsive variants
     {
-        source: 'consultorio/fachada-madison.jpg',
+        source: 'psicologa-danielle-gurgel-consultorio.avif',
         outputs: [
-            { width: 400, suffix: '-400w', formats: ['webp'] },
-            { width: 800, suffix: '-800w', formats: ['webp'] },
-            { width: 1200, suffix: '', formats: ['webp'] }, // Base size
+            { width: 400, suffix: '-400w', formats: ['avif', 'webp'] },
+            { width: 800, suffix: '-800w', formats: ['avif', 'webp'] },
         ]
-    },
-    // Sobre image - need 225w variant
-    {
-        source: 'sobre/bernardo-profissional.webp',
-        outputs: [
-            { width: 225, suffix: '-225w', formats: ['webp'] },
-        ]
-    },
+    }
 ];
 
 async function generateImages() {
